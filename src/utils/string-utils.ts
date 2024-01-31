@@ -20,12 +20,12 @@ export const splitTextIntoTextsOfMinLen = (
       cnt += consoleWidth + 1; // 1 for the space
       now.push(strWithoutSpace);
     } else {
-      ret.push(now.join(' '));
+      ret.push(now.join('·'));
       now = [strWithoutSpace];
       cnt = consoleWidth + 1;
     }
   });
-  ret.push(now.join(' '));
+  ret.push(now.join('·'));
 
   return ret;
 };
