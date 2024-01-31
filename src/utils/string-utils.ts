@@ -1,5 +1,6 @@
 import { ALIGNMENT, CharLengthDict } from '../models/common';
 import { findWidthInConsole } from './console-utils';
+import { WORD_SEPARATOR } from './table-constants';
 
 // ("How are you?",10) => ["How are ", "you?"]
 export const splitTextIntoTextsOfMinLen = (
@@ -9,7 +10,7 @@ export const splitTextIntoTextsOfMinLen = (
 ): string[] => {
   const ret: string[] = [];
 
-  const spaceSeparatedStrings = inpStr.split(' ');
+  const spaceSeparatedStrings = inpStr.split(WORD_SEPARATOR);
 
   let now: string[] = [];
   let cnt = 0;
@@ -38,11 +39,12 @@ export const textWithPadding = (
   columnLen: number,
   charLength?: CharLengthDict
 ): string => {
-  const curTextSize = findWidthInConsole(text, charLength);
-  // alignments for center padding case
-  const leftPadding = Math.floor((columnLen - curTextSize) / 2);
-  const rightPadding = columnLen - leftPadding - curTextSize;
-
+    const curTextSize = findWidthInConsole(text, charLength);
+    // alignments for center padding case
+    const leftPadding = Math.floor((columnLen - curTextSize) / 2);
+    const rightPadding = columnLen - leftPadding - curTextSize;
+    
+    console.log(text, alignment, columnLen, curTextSize, charLength);
   // handle edge cases where the text size is larger than the column length
   if (columnLen < curTextSize) {
     const splittedLines = splitTextIntoTextsOfMinLen(text, columnLen);
@@ -77,5 +79,5 @@ export const biggestWordInSentence = (
   charLength?: CharLengthDict
 ): number =>
   inpStr
-    .split(' ')
+    .split(WORD_SEPARATOR)
     .reduce((a, b) => Math.max(a, findWidthInConsole(b, charLength)), 0);

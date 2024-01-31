@@ -3,6 +3,8 @@ import { TableStyleDetails } from '../models/internal-table';
 
 export const DEFAULT_COLUMN_LEN = 20;
 
+export const WORD_SEPARATOR = /[ ·]/g;
+
 export const DEFAULT_ROW_SEPARATOR = false;
 
 export const DEFAULT_TABLE_STYLE: TableStyleDetails = {
