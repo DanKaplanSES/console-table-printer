@@ -15,6 +15,7 @@ export interface Column {
   length?: number;
   minLen?: number;
   maxLen?: number;
+  wordSeparator?: string | RegExp;
 }
 
 type TableLineDetailsKeys = 'left' | 'right' | 'mid' | 'other';

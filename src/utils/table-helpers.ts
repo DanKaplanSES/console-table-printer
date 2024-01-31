@@ -4,7 +4,7 @@ import { ComputedColumn } from '../models/external-table';
 import { Column } from '../models/internal-table';
 import { findWidthInConsole } from './console-utils';
 import {
-  biggestWordInSentence,
+  largestPhrase,
   splitTextIntoTextsOfMinLen,
 } from './string-utils';
 import {
@@ -12,6 +12,7 @@ import {
   DEFAULT_ROW_ALIGNMENT,
   DEFAULT_ROW_SEPARATOR,
   DEFAULT_HEADER_FONT_COLOR,
+  DEFAULT_WORD_SEPARATOR,
 } from './table-constants';
 
 const max = (a: number, b: number) => Math.max(a, b);
@@ -107,13 +108,13 @@ export const findLenOfColumn = (
     // if others cant fit find the max word length so that at least the table can be printed
     length = max(
       length,
-      max(column.maxLen, biggestWordInSentence(columnTitle, charLength))
+      max(column.maxLen, largestPhrase(columnTitle, column.wordSeparator || DEFAULT_WORD_SEPARATOR, charLength))
     );
     length = rows.reduce(
       (acc, row) =>
         max(
           acc,
-          biggestWordInSentence(cellText(row.text[columnId]), charLength)
+          largestPhrase(cellText(row.text[columnId]), column.wordSeparator || DEFAULT_WORD_SEPARATOR, charLength)
         ),
       length
     );

@@ -11,6 +11,7 @@ export interface ColumnOptionsRaw {
   color?: COLOR;
   maxLen?: number;
   minLen?: number;
+  wordSeparator?: string | RegExp;
 }
 
 export interface ComputedColumn extends ColumnOptionsRaw {

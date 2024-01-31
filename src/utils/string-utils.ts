@@ -72,10 +72,11 @@ export const textWithPadding = (
 };
 
 // ("How are you?",10) => ["How are ", "you?"]
-export const biggestWordInSentence = (
+export const largestPhrase = (
   inpStr: string,
-  charLength?: CharLengthDict
+  wordSeparator: string | RegExp,
+  charLength?: CharLengthDict,
 ): number =>
   inpStr
-    .split(' ')
+    .split(wordSeparator)
     .reduce((a, b) => Math.max(a, findWidthInConsole(b, charLength)), 0);
