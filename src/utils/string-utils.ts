@@ -44,7 +44,6 @@ export const textWithPadding = (
     const leftPadding = Math.floor((columnLen - curTextSize) / 2);
     const rightPadding = columnLen - leftPadding - curTextSize;
     
-    console.log(text, alignment, columnLen, curTextSize, charLength);
   // handle edge cases where the text size is larger than the column length
   if (columnLen < curTextSize) {
     const splittedLines = splitTextIntoTextsOfMinLen(text, columnLen);
