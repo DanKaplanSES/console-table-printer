@@ -210,4 +210,58 @@ describe('Testing column max Width', () => {
     expect(p.render()).toMatchSnapshot();
     p.printTable();
   });
+
+  it('Max Line Limit with custom column word separators', () => {
+    // Create a table
+    const p = new Table({
+      title: "Word separators",
+      columns: [
+        {
+          name: 'split_newlines',
+          alignment: 'center',
+          color: 'red',
+          wordSeparator: '\n',
+        },
+        {
+          name: 'split_but_is',
+          alignment: 'right',
+          maxLen: 10,
+          title: 'maxLen:10',
+          wordSeparator: /but|is/g,
+        },
+        {
+          name: 'set_to_default',
+          alignment: 'center',
+          color: 'green',
+          maxLen: 8,
+          title: 'maxLen:8',
+          wordSeparator: ' '
+        },
+      ],
+    });
+
+    // add rows with color
+    p.addRow({
+      split_newlines: `line 1`,
+      split_but_is: 'This row is blue',
+      set_to_default: 'This row is green column',
+    });
+
+    p.addRow({
+      split_newlines: `line 1\nline 2`,
+      split_but_is: 'This row is blue but again another line',
+      set_to_default:
+        'This row is green column but a little longer to make life harder',
+    });
+
+    p.addRow({
+      split_newlines: `line 1\nline 2\nline 3`,
+      split_but_is: 'The last one I dont know what the color is',
+      set_to_default: 'Thank god this is the last one',
+    });
+
+    // print
+    p.printTable();
+    expect(p.render()).toMatchSnapshot();
+  });
 });

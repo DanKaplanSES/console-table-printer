@@ -9,7 +9,7 @@ export const splitTextIntoTextsOfMinLen = (
 ): string[] => {
   const ret: string[] = [];
 
-  const spaceSeparatedStrings = inpStr.split(' ');
+  const spaceSeparatedStrings = inpStr.split(wordSeparator);
 
   let now: string[] = [];
   let cnt = 0;
@@ -76,7 +76,9 @@ export const largestPhrase = (
   inpStr: string,
   wordSeparator: string | RegExp,
   charLength?: CharLengthDict,
-): number =>
-  inpStr
+): number => {
+    console.log(`wordSeparator`, `'${wordSeparator}'`);
+    return inpStr
     .split(wordSeparator)
     .reduce((a, b) => Math.max(a, findWidthInConsole(b, charLength)), 0);
+}
